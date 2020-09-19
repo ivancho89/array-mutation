@@ -6,12 +6,12 @@ const baseService = fileUtil.requireBase('service')
 /**
  *
  */
-module.exports = class exampleModuleService extends baseService {
+module.exports = class stamentModuleService extends baseService {
 	constructor() {
 		super()
 	}
 
-	async example(params) {
+	async generateUpdateStatement(params) {
 		return params
 	}
 }
