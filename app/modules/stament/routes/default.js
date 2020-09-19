@@ -1,6 +1,6 @@
 const fileUtil = rootRequire('lib/utils/files.util')
 
-const exampleController = fileUtil.requireController('example')
+const stamentController = fileUtil.requireController('stament')
 
 module.exports = {
 	routes: [
@@ -8,7 +8,7 @@ module.exports = {
 		 * Entity
 		 */
 
-		['exmaples'],
+		['staments'],
 
 		/**
 		 * @api {post} /
@@ -43,6 +43,6 @@ module.exports = {
 		 *   "data": []
 		 *  }
 		 */
-		['post', '', exampleController.example],
+		['post', '', stamentController.generateUpdateStatement],
 	],
 }
