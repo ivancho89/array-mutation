@@ -50,7 +50,9 @@ const wrongAdd = { videos: [{ _id: 15, another: [{ lable: 'hurra' }] }] }
 
 const singleUpdate = { videos: [{ _id: 2, mykey: 'update one' }] }
 
-const updateSingleAndLeaf = { "videos": [{"_id":2, "field":"label", "another":[{"_id":8,"asd":"true"}] }] }
+const updateSingleAndLeaf = {
+	videos: [{ _id: 2, field: 'label', another: [{ _id: 8, asd: 'true' }] }],
+}
 
 const updateDeep = { videos: [{ _id: 2, another: [{ _id: 8, hello: 'true' }] }] }
 
@@ -69,5 +71,5 @@ module.exports = {
 	updateDeep,
 	singleDelete,
 	deleteDeep,
-	updateSingleAndLeaf
+	updateSingleAndLeaf,
 }
