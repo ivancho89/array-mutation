@@ -12,12 +12,11 @@ module.exports = class statementModuleService extends baseService {
 		this.updateStaments = {}
 	}
 
-
 	/*
-	*  Find the key that has an array on it if any
-	*
-	*  @param {Object} items  object to find the key with the array on it
-	*/
+	 *  Find the key that has an array on it if any
+	 *
+	 *  @param {Object} items  object to find the key with the array on it
+	 */
 	findListKey(items) {
 		const keys = Object.keys(items)
 		const listKeyStr = keys.find(key => Array.isArray(items[key]))
@@ -25,12 +24,12 @@ module.exports = class statementModuleService extends baseService {
 	}
 
 	/*
-	*  Set the statements
-	*
-	*  @param {String} operation  the type of stament to add
-	*  @param {String} Key the key to add in the stament
-	*  @param {Any} stamentValue the value of the key in the statement
-	*/
+	 *  Set the statements
+	 *
+	 *  @param {String} operation  the type of stament to add
+	 *  @param {String} Key the key to add in the stament
+	 *  @param {Any} stamentValue the value of the key in the statement
+	 */
 	setStatement(operation = 'add', key = '', stamentValue) {
 		const operationTypeKeyStr = `$${operation}`
 		if (!this.updateStaments[operationTypeKeyStr]) this.updateStaments[operationTypeKeyStr] = {}
@@ -46,12 +45,12 @@ module.exports = class statementModuleService extends baseService {
 	}
 
 	/*
-	* Start the flow to go through the mutations and generate the statements if any
-	*
-	*  @param {Object} params 
-	*  @param {Object} params.original original document
-	*  @param {Object} params.mutation List of mutation to process
-	*/
+	 * Start the flow to go through the mutations and generate the statements if any
+	 *
+	 *  @param {Object} params
+	 *  @param {Object} params.original original document
+	 *  @param {Object} params.mutation List of mutation to process
+	 */
 	async generateUpdateStatement(params) {
 		const originalDocument = params.original
 		const mutations = params.mutation
