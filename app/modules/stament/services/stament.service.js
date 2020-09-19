@@ -71,7 +71,6 @@ module.exports = class stamentModuleService extends baseService {
 						if (mutationDoc._delete) {
 							let key = `${parentKey}.${mainIndex}`
 							this.setStament('remove', key, true)
-
 							return
 						}
 

@@ -55,6 +55,15 @@ describe('Example Test', () => {
 
 			expect(response).to.have.property('$update')
 		})
+
+
+		it('should update route document and document in a leaf', async () => {
+			this.reqBody.mutation = fixtures.updateSingleAndLeaf
+			const serviceInstance = new StamentService()
+			const response = await serviceInstance.generateUpdateStatement(this.reqBody)
+
+			expect(response).to.have.property('$update')
+		})	
 	})
 
 	describe('$REMOVE', () => {
