@@ -1,0 +1,15 @@
+.DS_Store
+.vscode
+.vscode/
+
+node_modules/
+dist/
+yarn-error.log
+coverage/*
+dump.rdb
+
+public/*
+
+package-lock.json
+
+.env
