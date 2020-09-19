@@ -55,21 +55,18 @@ module.exports = class statementModuleService extends baseService {
 	}
 
 	/**
-	*  Iterate through a list and validate if match the at least one of the cases ($add, $update, $delete)
-	*  if so, add the case into updateStaments and complete
-	*/
+	 *  Iterate through a list and validate if match the at least one of the cases ($add, $update, $delete)
+	 *  if so, add the case into updateStaments and complete
+	 */
 	deepIterator(mainList = [], mutationDoc = {}, parentKey = null) {
 		try {
-
 			// Iterta the main list
 			mainList.forEach((listItem, mainIndex) => {
-
 				// Validate if the mutation doesn't have the _id in order to set the create
 				if (!mutationDoc._id) {
 					this.setStament('add', parentKey, mutationDoc)
 					return
-				} else if (listItem._id === mutationDoc._id){
-					
+				} else if (listItem._id === mutationDoc._id) {
 					// Validate if the mutation has the _delete in order to set the remove
 					if (mutationDoc._delete) {
 						let mutationKey = `${parentKey}.${mainIndex}`
@@ -78,15 +75,17 @@ module.exports = class statementModuleService extends baseService {
 					}
 
 					// if the mutation has fields that are not an array, set each one of the to update
-					Object.keys(mutationDoc).filter(key => {
-						return key != '_id'
-					}).forEach(k => {
-						if (!Array.isArray(mutationDoc[k]))
-							this.setStament('update', `${parentKey}.${mainIndex}.${k}`, mutationDoc[k])
-					})
+					Object.keys(mutationDoc)
+						.filter(key => {
+							return key != '_id'
+						})
+						.forEach(k => {
+							if (!Array.isArray(mutationDoc[k]))
+								this.setStament('update', `${parentKey}.${mainIndex}.${k}`, mutationDoc[k])
+						})
 
 					// Get the key if the mutation that has an array as a value
-					const mutationListKeyStr = this.findListKey(mutationDoc) 
+					const mutationListKeyStr = this.findListKey(mutationDoc)
 
 					// if exists the array, iterate through it in order to fulfill the mutation
 					if (mutationListKeyStr) {
@@ -100,7 +99,7 @@ module.exports = class statementModuleService extends baseService {
 							)
 						})
 					}
-					
+
 					return
 				}
 			})

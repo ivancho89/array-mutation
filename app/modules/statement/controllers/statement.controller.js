@@ -15,8 +15,8 @@ exports.generateUpdateStatement = async (req, res) => {
 	try {
 		const serviceInstance = new StatementService()
 
-		if(!req.body.original || !req.body.mutation){
-			res.badRequest({userMessage:  i18n.__('invalid_body'), serverInfo: req.body  })
+		if (!req.body.original || !req.body.mutation) {
+			res.badRequest({ userMessage: i18n.__('invalid_body'), serverInfo: req.body })
 		}
 
 		const result = await serviceInstance.generateUpdateStatement(req.body)
