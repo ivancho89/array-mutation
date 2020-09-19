@@ -24,10 +24,10 @@ If you dont have installed yarn in your machine please follow the next documenta
 
 1. Improve the logic using reduce and map
 2. Validations
-	2.1. Validate input fields
-		2.1.1.  Validate mutations key
-		2.1.2.  Validate multiple origins
-	2.2. Validate fields in the objects
-	2.3. Validate conflicts (in case there is a creation or update or remove at the 		same time)
+	- Validate input fields
+		- Validate mutations key
+		- Validate multiple origins
+	- Validate fields in the objects
+	- Validate conflicts (in case there is a creation or update or remove at the same time)
 3. Add failure unit test cases
 4. Create utils in order to add the function **findListKey** and other posible functions there
