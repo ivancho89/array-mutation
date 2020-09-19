@@ -12,13 +12,26 @@ module.exports = class statementModuleService extends baseService {
 		this.updateStaments = {}
 	}
 
+
+	/*
+	*  Find the key that has an array on it if any
+	*
+	*  @param {Object} items  object to find the key with the array on it
+	*/
 	findListKey(items) {
 		const keys = Object.keys(items)
 		const listKeyStr = keys.find(key => Array.isArray(items[key]))
 		return listKeyStr
 	}
 
-	setStament(operation = 'add', key = '', stamentValue = '') {
+	/*
+	*  Set the statements
+	*
+	*  @param {String} operation  the type of stament to add
+	*  @param {String} Key the key to add in the stament
+	*  @param {Any} stamentValue the value of the key in the statement
+	*/
+	setStatement(operation = 'add', key = '', stamentValue) {
 		const operationTypeKeyStr = `$${operation}`
 		if (!this.updateStaments[operationTypeKeyStr]) this.updateStaments[operationTypeKeyStr] = {}
 
@@ -32,6 +45,13 @@ module.exports = class statementModuleService extends baseService {
 		}
 	}
 
+	/*
+	* Start the flow to go through the mutations and generate the statements if any
+	*
+	*  @param {Object} params 
+	*  @param {Object} params.original original document
+	*  @param {Object} params.mutation List of mutation to process
+	*/
 	async generateUpdateStatement(params) {
 		const originalDocument = params.original
 		const mutations = params.mutation
@@ -57,6 +77,10 @@ module.exports = class statementModuleService extends baseService {
 	/**
 	 *  Iterate through a list and validate if match the at least one of the cases ($add, $update, $delete)
 	 *  if so, add the case into updateStaments and complete
+	 *
+	 *  @param {Array} mainList main list to search to
+	 *  @param {Object} mutationDoc mutation to validate
+	 *  @param {String} parentKey parent key of the process
 	 */
 	deepIterator(mainList = [], mutationDoc = {}, parentKey = null) {
 		try {
@@ -64,13 +88,13 @@ module.exports = class statementModuleService extends baseService {
 			mainList.forEach((listItem, mainIndex) => {
 				// Validate if the mutation doesn't have the _id in order to set the create
 				if (!mutationDoc._id) {
-					this.setStament('add', parentKey, mutationDoc)
+					this.setStatement('add', parentKey, mutationDoc)
 					return
 				} else if (listItem._id === mutationDoc._id) {
 					// Validate if the mutation has the _delete in order to set the remove
 					if (mutationDoc._delete) {
 						let mutationKey = `${parentKey}.${mainIndex}`
-						this.setStament('remove', mutationKey, true)
+						this.setStatement('remove', mutationKey, true)
 						return
 					}
 
@@ -81,7 +105,7 @@ module.exports = class statementModuleService extends baseService {
 						})
 						.forEach(k => {
 							if (!Array.isArray(mutationDoc[k]))
-								this.setStament('update', `${parentKey}.${mainIndex}.${k}`, mutationDoc[k])
+								this.setStatement('update', `${parentKey}.${mainIndex}.${k}`, mutationDoc[k])
 						})
 
 					// Get the key if the mutation that has an array as a value
