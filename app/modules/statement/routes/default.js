@@ -1,6 +1,6 @@
 const fileUtil = rootRequire('lib/utils/files.util')
 
-const stamentController = fileUtil.requireController('stament')
+const statementController = fileUtil.requireController('statement')
 
 module.exports = {
 	routes: [
@@ -8,7 +8,7 @@ module.exports = {
 		 * Entity
 		 */
 
-		['staments'],
+		['statements'],
 
 		/**
 		 * @api {post} /
@@ -74,11 +74,11 @@ module.exports = {
 		 *  HTTP/1.1 400 Bad Request
 		 *  {
 		 *   "code": 400,
-		 *   "userMessage": "Oops! Seems something went wrong with the request, try again later.",
+		 *   "userMessage": "Invalid Input, pleae check you are sending the origianl an mutation objects",
 		 *   "serverInfo": "",
 		 *   "data": []
 		 *  }
 		 */
-		['post', '', stamentController.generateUpdateStatement],
+		['post', '', statementController.generateUpdateStatement],
 	],
 }
