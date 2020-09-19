@@ -23,10 +23,10 @@ module.exports = {
 		 * @apiParam {Object} mutation
 		 *
 		 * @apiParamExample {json} Request-Example:
-		 * 
+		 *
 		 *
 		 *  {
-	     *		"original":{
+		 *		"original":{
 		 *			"name":"ivan",
 		 *			"videos":[{
 		 *				"_id":1,

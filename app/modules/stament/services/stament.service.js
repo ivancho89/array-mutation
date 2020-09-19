@@ -19,7 +19,6 @@ module.exports = class stamentModuleService extends baseService {
 	}
 
 	setStament(operation = 'add', key = '', stamentValue = '') {
-
 		const operationTypeKeyStr = `$${operation}`
 		if (!this.updateStaments[operationTypeKeyStr]) this.updateStaments[operationTypeKeyStr] = {}
 
