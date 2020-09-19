@@ -19,8 +19,6 @@ module.exports = class stamentModuleService extends baseService {
 	}
 
 	setStament(operation = 'add', key = '', stamentValue = '') {
-		console.log(' setStament ', operation, key, stamentValue)
-
 		const operationTypeKeyStr = `$${operation}`
 		if (!this.updateStaments[operationTypeKeyStr]) this.updateStaments[operationTypeKeyStr] = {}
 
@@ -73,7 +71,6 @@ module.exports = class stamentModuleService extends baseService {
 						if (mutationDoc._delete) {
 							let key = `${parentKey}.${mainIndex}`
 							this.setStament('remove', key, true)
-
 							return
 						}
 
@@ -83,7 +80,6 @@ module.exports = class stamentModuleService extends baseService {
 						})
 						const mutationListKeyStr = mutationKeys.find(key => Array.isArray(mutationDoc[key]))
 
-						console.log(this)
 						mutationKeys.forEach(k => {
 							if (!Array.isArray(mutationDoc[k])) {
 								this.setStament('update', `${parentKey}.${mainIndex}.${k}`, mutationDoc[k])
